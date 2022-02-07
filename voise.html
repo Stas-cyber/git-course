@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: #fdffbc;
+        }
+
+        .conteiner {
+            display: grid;
+            grid-template-columns: repeat(1, 400px);
+            grid-gap: 10px;
+            align-items: center;
+            justify-items: center;
+            margin-left: 35%;
+        }
+
+        h1 {
+            font-family: Cambria, Cochin;
+            text-align: center;
+        }
+
+        .text {
+            width: 200px;
+            height: 70px;
+            resize: none;
+            border: 2px solid #444;
+            outline: none;
+        }
+
+        .read {
+            border: 1px solid #444;
+            background: none;
+            outline: none;
+            font-family: Cambria, Cochin;
+        }
+
+        .read:hover {
+            background-color: #ffc1b6;
+            animation-name: anim;
+            animation-duration: 300ms;
+            border-radius: 12px;
+        }
+
+        @keyframes anim {
+            0% {
+                border-radius: 1px;
+            }
+
+            25% {
+                border-radius: 3px;
+            }
+
+            50% {
+                border-radius: 6px;
+            }
+
+            75% {
+                border-radius: 9px;
+            }
+
+            100% {
+                border-radius: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="conteiner">
+        <h1>Озвучить текст</h1>
+        <textarea class="text" placeholder="Введите текст"></textarea>
+        <button class="read">Озвучить</button>
+    </div>
+    <script>
+        const button = document.querySelector('.read');
+        const textArea = document.querySelector('.text')
+
+        const speak = text => {
+            const message = new SpeechSynthesisUtterance();
+            message.lang = "ru-RU";
+            message.text = text;
+            window.speechSynthesis.speak(message);
+        }
+
+        button.addEventListener('click', () => {
+            speak(textArea.value);
+        })
+    </script>
+</body>
+
+</html>
